@@ -45,7 +45,7 @@ Java_com_sq_rknn_rknnyolov11_YoloV11Detect_init(JNIEnv *env, jobject thiz, jstri
     ret = use_zero_copy ? init_yolo11_model_zerocopy(modelPath, &rknn_app_ctx) :
           init_yolo11_model(modelPath, &rknn_app_ctx);
     if (ret != 0) {
-        LOGE("init_yolov8_model fail! ret=%d model_path=%s\n", ret, modelPath);
+        LOGE("init_yolov11_model fail! ret=%d model_path=%s\n", ret, modelPath);
         return JNI_FALSE;
     }
 
@@ -98,7 +98,7 @@ Java_com_sq_rknn_rknnyolov11_YoloV11Detect_detect(JNIEnv *env, jobject thiz, job
 //    }
 
     if (ret != 0) {
-        LOGE("inference_yolov8_model fail! ret=%d\n", ret);
+        LOGE("inference_yolov11_model fail! ret=%d\n", ret);
         return JNI_FALSE;
     }
 
@@ -161,7 +161,7 @@ Java_com_sq_rknn_rknnyolov11_YoloV11Detect_detect2(JNIEnv *env, jobject thiz, jo
     int64_t elapse_us = getCurrentTimeUs() - start_us;
 
     if (ret != 0) {
-        LOGE("inference_yolov8_model fail! ret=%d\n", ret);
+        LOGE("inference_yolov11_model fail! ret=%d\n", ret);
         AndroidBitmap_unlockPixels(env, jbitmap);
         return NULL;
     }
@@ -218,7 +218,7 @@ Java_com_sq_rknn_rknnyolov11_YoloV11Detect_release(JNIEnv *env, jobject thiz) {
     int ret = use_zero_copy ? release_yolo11_model_zerocopy(&rknn_app_ctx)
                             : release_yolo11_model(&rknn_app_ctx);
     if (ret != 0) {
-        LOGE("release_yolov8_model fail! ret=%d\n", ret);
+        LOGE("release_yolov11_model fail! ret=%d\n", ret);
         return false;
     }
 
